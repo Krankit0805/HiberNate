@@ -1,0 +1,29 @@
+package org.jsp.hibernate;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class DeleteRecord {
+
+	public static void main(String[] args) {
+ Scanner sc=new Scanner(System.in);
+ System.out.println("Enter employee id to delete a record ");
+ int id=sc.nextInt();
+ Session s =new Configuration().configure().buildSessionFactory().openSession();
+ Employee e= s.get(Employee.class, id);
+ if(e!=null) {
+	 s.delete(e);
+	 Transaction t = s.beginTransaction();
+	 t.commit();
+	 System.out.println("delete succesfully");
+ }
+ else {
+	 System.out.println("please enter a valid id !!");
+ }
+ 
+	}
+
+}
